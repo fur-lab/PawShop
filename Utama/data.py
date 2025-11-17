@@ -30,3 +30,12 @@ status_login = False
 
 # List kategori produk yang valid (Opsional: memudahkan validasi di Functions.py)
 KATEGORI_VALID = ["Makanan", "Kebersihan", "Grooming", "Mainan"]
+
+# COOBBAA
+Username = "admin"  
+Password = "admin1234"
+percobaan = 0
+max_percobaan = 3
+
+Admin = False
+User = False

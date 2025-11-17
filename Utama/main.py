@@ -1,5 +1,6 @@
 import os
 import time
+import pwinput
 from admin import *
 from user import *
 from fungsi import *
@@ -74,42 +75,43 @@ while True :
                                 break
 
                     while Admin == True :
-                    while status_login == True:
-                        layar_bersih()
-                        menu_admin()
+                        while status_login == True:
+                            layar_bersih()
+                            menu_admin()
 
-                        pilihan_admin = input("Pilih menu (1-6): ")
+                            pilihan_admin = input("Pilih menu (1-6): ")
 
-                        if pilihan_admin == "1":   # Lihat menu
-                            layar_bersih()
-                            tampilkan_daftar_produk() # ini pakai prosedur 1
-                        
-                        elif pilihan_admin == "2":   # Update
-                            layar_bersih()
-                            update()
-                        
-                        elif pilihan_admin == "3":   # Edit
-                            layar_bersih()
-                            edit()
-
-                        elif pilihan_admin == "4":   # Edit
-                            layar_bersih()
-                            hapus()
-                        
-                        elif pilihan_admin == "5":   # Cari
-                            layar_bersih()
-                            print("=" * 59)
-                            print("|                      CARI PRODUK                        |")
-                            print("=" * 59)
-                            keyword = input("Masukkan nama produk: ")
-                            
-                            cari_produk_dan_tampilkan(keyword)
-                            
-                        elif pilihan_admin == "6":
+                            if pilihan_admin == "1":   # Lihat menu
                                 layar_bersih()
-                                print("Logout berhasil!")
-                                Admin = False
-                                status_login = False
-                        
-                        else:
-                            print("Pilihan tidak valid!")
+                                tampilkan_daftar_produk() # ini pakai prosedur 1
+                            
+                            elif pilihan_admin == "2":   # Update
+                                layar_bersih()
+                                update()
+                            
+                            elif pilihan_admin == "3":   # Edit
+                                layar_bersih()
+                                edit()
+
+                            elif pilihan_admin == "4":   # Edit
+                                layar_bersih()
+                                hapus()
+                            
+                            elif pilihan_admin == "5":   # Cari
+                                layar_bersih()
+                                print("=" * 59)
+                                print("|                      CARI PRODUK                        |")
+                                print("=" * 59)
+                                keyword = input("Masukkan nama produk: ")
+                                
+                                cari_produk_dan_tampilkan(keyword)
+                                
+                            elif pilihan_admin == "6":
+                                    layar_bersih()
+                                    print("Logout berhasil!")
+                                    Admin = False
+                                    status_login = False
+                            
+                            else:
+                                print("Pilihan tidak valid!")
+                                

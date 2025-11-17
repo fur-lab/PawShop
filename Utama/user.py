@@ -1,6 +1,8 @@
 import os
 import time
 from prettytable import PrettyTable
+from data import *
+from fungsi import *
 
 def menu_user() :
         print("=" * 50)
