@@ -29,3 +29,38 @@ def login() :
         print("1. Admin")
         print("2. User")
         
+
+def tampilkan_header_utama():
+    os.system('cls || clear')
+    print("=" * 60)
+    print("|      SELAMAT DATANG DI TOKO PERALATAN KUCING WINGKY      |")
+    print("=" * 60)
+
+def tampilkan_daftar_produk(): #prosedur 1
+    print("\n" + "=" * 59)
+    print("|                   DAFTAR PRODUK WINGKY                  |")
+    print("=" * 59)
+    if len(produk) == 0:
+        print("Tidak ada produk tersedia.")
+    else:
+        table = PrettyTable()
+        table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
+        table.align["ID"] = "c"
+        table.align["Nama Produk"] = "l"
+        table.align["Kategori"] = "l"
+        table.align["Harga"] = "r"
+        table.align["Stok"] = "c"
+        
+        for id_produk, data in produk.items(): #ini variabel lokal yang ada dalam loop
+            table.add_row([
+                id_produk,
+                data['nama'],
+                data['kategori'],
+                f"Rp {data['harga']:,}",
+                data['stok']
+            ])
+        
+        print(table)
+    
+    print("=" * 59)
+

@@ -3,6 +3,7 @@ import time
 from admin import *
 from user import *
 from fungsi import *
+from data import *
 from prettytable import PrettyTable
 
 while True :
