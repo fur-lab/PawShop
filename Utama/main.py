@@ -1,116 +1,148 @@
 import os
 import time
+import data
 from prettytable import PrettyTable
-
 from fungsi import *
 from admin import *
-from user import *
-from data import *
 
-while True :
 
+def main():
+    # Loading hanya sekali di awal program
     loading()
-    tampilkan_header_utama()
-    menu_awal()
-
-    pilihan_utama = input("Pilih menu (1-3): ")
-
-    if pilihan_utama == "1":
-                layar_bersih()
-                login()
-                pilihan_login = input("Pilih menu (1-2): ")
-
-                if pilihan_login == "1" : # Login Admin
-                    layar_bersih()
-                    tampilkan_header_utama()
-                
-                    while percobaan < max_percobaan:
-                            Login_Username = input("Masukkan username Admin : ")
-                            Login_Password = input("Masukan password Admin : ")
-
-
-                            if Login_Username == Username and Login_Password == Password  :
-                
-                                Admin = True
-                                status_login = True
-                                break
-                                    
-
-                            else:
-                                percobaan += 1
-                                print("Username atau Password salah !!!")
-                                layar_bersih()
-
-                                if percobaan == max_percobaan :
-                                    layar_bersih()
-                                    print("Username atau Password salah !!!")
-                                    input("Tekan Enter untuk memulai dari awal......")
-                                    break
-                    
-                if pilihan_login == "2" : # Login User
-                    layar_bersih()
-                    tampilkan_header_utama()
-
-                    while percobaan < max_percobaan:
-                        Login_Username = input("Masukkan username : ")
-                        Login_Password = input("Masukan password : ")
-
-
-                        if Login_Username == pengguna and Login_Password == Password  :
+    
+    while True:
+        tampilkan_header_utama()
+        menu_awal()
+        
+        pilihan_utama = input("\nPilih menu (1-3): ")
+        
+        # Menu Login
+        if pilihan_utama == "1":
+            layar_bersih()
+            berhasil_login = login()
             
-                            User = True
-                            status_login = True
-                            break
-                                
-
-                        else:
-                            percobaan += 1
-                            print("Username atau Password salah !!!")
-                            layar_bersih()
-
-                            if percobaan == max_percobaan :
-                                layar_bersih()
-                                print("Username atau Password salah !!!")
-                                input("Tekan Enter untuk memulai dari awal......")
-                                break
-
-    while Admin == True :
-                    while status_login == True:
+            if berhasil_login:
+                input("Press enter...")  # Debug pause
+                
+                # Cek role user setelah login berhasil
+                if data.role_login == "admin":
+                    # Menu Admin
+                    while data.status_login:
                         layar_bersih()
                         menu_admin()
-
-                        pilihan_admin = input("Pilih menu (1-6): ")
-
-                        if pilihan_admin == "1":   # Lihat menu
-                            layar_bersih()
-                            tampilkan_daftar_produk() # ini pakai prosedur 1
                         
-                        elif pilihan_admin == "2":   # Update
+                        pilihan_admin = input("\nPilih menu (1-6): ")
+                        
+                        if pilihan_admin == "1":
+                            layar_bersih()
+                            tampilkan_daftar_produk()
+                            input("\nTekan ENTER untuk kembali...")
+                        
+                        elif pilihan_admin == "2":
                             layar_bersih()
                             update()
                         
-                        elif pilihan_admin == "3":   # Edit
+                        elif pilihan_admin == "3":
                             layar_bersih()
                             edit()
-
-                        elif pilihan_admin == "4":   # Edit
+                        
+                        elif pilihan_admin == "4":
                             layar_bersih()
                             hapus()
                         
-                        elif pilihan_admin == "5":   # Cari
+                        elif pilihan_admin == "5":
                             layar_bersih()
                             print("=" * 59)
                             print("|                      CARI PRODUK                        |")
                             print("=" * 59)
                             keyword = input("Masukkan nama produk: ")
-                            
                             cari_produk_dan_tampilkan(keyword)
-                            
+                            input("\nTekan ENTER untuk kembali...")
+                        
                         elif pilihan_admin == "6":
-                                layar_bersih()
-                                print("Logout berhasil!")
-                                Admin = False
-                                status_login = False
+                            layar_bersih()
+                            print("Logout berhasil!")
+                            time.sleep(2)
+                            data.status_login = False
+                            data.user_login = ""
+                            data.role_login = ""
+                            break
                         
                         else:
-                            print("Pilihan tidak valid!")
+                            print("\nPilihan tidak valid!")
+                            time.sleep(2)
+                
+                elif data.role_login == "user":
+                    # Menu User
+                    while data.status_login:
+                        layar_bersih()
+                        menu_user()
+                        
+                        pilihan_user = input("\nPilih menu (1-7): ")
+                        
+                        if pilihan_user == "1":
+                            layar_bersih()
+                            tampilkan_daftar_produk()
+                            input("\nTekan ENTER untuk kembali...")
+                        
+                        elif pilihan_user == "2":
+                            layar_bersih()
+                            print("=" * 59)
+                            print("|                      CARI PRODUK                        |")
+                            print("=" * 59)
+                            keyword = input("Masukkan nama produk: ")
+                            cari_produk_dan_tampilkan(keyword)
+                            input("\nTekan ENTER untuk kembali...")
+                        
+                        elif pilihan_user == "3":
+                            layar_bersih()
+                            tambah_keranjang()
+                        
+                        elif pilihan_user == "4":
+                            layar_bersih()
+                            tampilkan_isi_keranjang(data.user_login)
+                            input("\nTekan ENTER untuk kembali...")
+                        
+                        elif pilihan_user == "5":
+                            layar_bersih()
+                            hapus_dari_keranjang()
+                            time.sleep(2)
+                        
+                        elif pilihan_user == "6":
+                            layar_bersih()
+                            checkout()
+                            time.sleep(2)
+                        
+                        elif pilihan_user == "7":
+                            layar_bersih()
+                            print("Logout berhasil!")
+                            time.sleep(2)
+                            data.status_login = False
+                            data.user_login = ""
+                            data.role_login = ""
+                            break
+                        
+                        else:
+                            print("\nPilihan tidak valid!")
+                            time.sleep(2)
+        
+        # Menu Register
+        elif pilihan_utama == "2":
+            layar_bersih()
+            register()
+        
+        # Menu Keluar
+        elif pilihan_utama == "3":
+            layar_bersih()
+            print("=" * 60)
+            print("|         Terima kasih telah menggunakan aplikasi!         |")
+            print("=" * 60)
+            break
+        
+        else:
+            print("\nPilihan tidak valid!")
+            time.sleep(2)
+            layar_bersih()
+
+if __name__ == "__main__":
+    main()
