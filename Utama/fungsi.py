@@ -2,7 +2,7 @@ import os
 import time
 import pwinput
 from prettytable import PrettyTable
-import data  # Import module data, bukan from data import *
+import data  
 
 def tampilkan_header_utama():
     os.system('cls || clear')
@@ -16,7 +16,6 @@ def menu_awal():
     print("3. Keluar")
 
 def login():
-    """Fungsi untuk menangani proses login"""
     tampilkan_header_utama()
     print("\n-------------------- LOGIN SECTION -------------------------")
     
@@ -48,7 +47,6 @@ def login():
         return False
 
 def register():
-    """Fungsi untuk menangani proses registrasi"""
     tampilkan_header_utama()
     print("\n-------------------- REGISTER SECTION ----------------------")
     
@@ -280,7 +278,6 @@ def cari_produk_dan_tampilkan(keyword):
     print("=" * 59)
 
 def hapus_dari_keranjang():
-    """Fungsi untuk menghapus item dari keranjang"""
     print("=" * 38)
     print("|         HAPUS DARI KERANJANG       |")
     print("=" * 38)
@@ -333,7 +330,6 @@ def hapus_dari_keranjang():
 
 
 def checkout():
-    """Fungsi untuk checkout dan menyelesaikan transaksi"""
     print("=" * 59)
     print("|                       CHECKOUT                          |")
     print("=" * 59)

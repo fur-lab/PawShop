@@ -7,7 +7,7 @@ from admin import *
 
 
 def main():
-    # Loading hanya sekali di awal program
+    # Loadingnya hanya sekali pas di awal program
     loading()
     
     while True:
