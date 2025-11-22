@@ -1,11 +1,11 @@
 import os
 import time
-import pwinput
+from prettytable import PrettyTable
+
+from fungsi import *
 from admin import *
 from user import *
-from fungsi import *
 from data import *
-from prettytable import PrettyTable
 
 while True :
 
@@ -74,44 +74,43 @@ while True :
                                 input("Tekan Enter untuk memulai dari awal......")
                                 break
 
-                    while Admin == True :
-                        while status_login == True:
+    while Admin == True :
+                    while status_login == True:
+                        layar_bersih()
+                        menu_admin()
+
+                        pilihan_admin = input("Pilih menu (1-6): ")
+
+                        if pilihan_admin == "1":   # Lihat menu
                             layar_bersih()
-                            menu_admin()
+                            tampilkan_daftar_produk() # ini pakai prosedur 1
+                        
+                        elif pilihan_admin == "2":   # Update
+                            layar_bersih()
+                            update()
+                        
+                        elif pilihan_admin == "3":   # Edit
+                            layar_bersih()
+                            edit()
 
-                            pilihan_admin = input("Pilih menu (1-6): ")
-
-                            if pilihan_admin == "1":   # Lihat menu
-                                layar_bersih()
-                                tampilkan_daftar_produk() # ini pakai prosedur 1
+                        elif pilihan_admin == "4":   # Edit
+                            layar_bersih()
+                            hapus()
+                        
+                        elif pilihan_admin == "5":   # Cari
+                            layar_bersih()
+                            print("=" * 59)
+                            print("|                      CARI PRODUK                        |")
+                            print("=" * 59)
+                            keyword = input("Masukkan nama produk: ")
                             
-                            elif pilihan_admin == "2":   # Update
-                                layar_bersih()
-                                update()
+                            cari_produk_dan_tampilkan(keyword)
                             
-                            elif pilihan_admin == "3":   # Edit
+                        elif pilihan_admin == "6":
                                 layar_bersih()
-                                edit()
-
-                            elif pilihan_admin == "4":   # Edit
-                                layar_bersih()
-                                hapus()
-                            
-                            elif pilihan_admin == "5":   # Cari
-                                layar_bersih()
-                                print("=" * 59)
-                                print("|                      CARI PRODUK                        |")
-                                print("=" * 59)
-                                keyword = input("Masukkan nama produk: ")
-                                
-                                cari_produk_dan_tampilkan(keyword)
-                                
-                            elif pilihan_admin == "6":
-                                    layar_bersih()
-                                    print("Logout berhasil!")
-                                    Admin = False
-                                    status_login = False
-                            
-                            else:
-                                print("Pilihan tidak valid!")
-                                
+                                print("Logout berhasil!")
+                                Admin = False
+                                status_login = False
+                        
+                        else:
+                            print("Pilihan tidak valid!")
