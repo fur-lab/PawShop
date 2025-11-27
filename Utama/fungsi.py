@@ -2,7 +2,8 @@ import os
 import time
 import pwinput
 from prettytable import PrettyTable
-import data  
+import data 
+from user import *
 
 def tampilkan_header_utama():
     layar_bersih()
@@ -246,76 +247,9 @@ def cari_produk_dan_tampilkan(keyword):
         
     else:
         print("\nProduk tidak ditemukan.")
+
     print("=" * 59)
     time.sleep(2)
-
-
-
-
-# --- FUNGSI UTAMA MENU LOOP ---
-
-def run_user_menu():
-    while data.status_login and data.role_login == "user":
-        layar_bersih()
-        menu_user()
-        
-        pilihan = input("\nMasukkan pilihan (1-7): ")
-        
-        if pilihan == '1':
-            tampilkan_daftar_produk()
-            input("Tekan ENTER untuk kembali...")
-        elif pilihan == '2':
-            keyword = input("Masukkan nama produk yang dicari: ")
-            cari_produk_dan_tampilkan(keyword)
-            input("Tekan ENTER untuk kembali...")
-        elif pilihan == '3':
-            lanjut_tambah = True
-            while lanjut_tambah:
-                # Nilai kembali dari tambah_keranjang (True/False) menentukan apakah loop ini berjalan lagi
-                lanjut_tambah = tambah_keranjang() 
-        elif pilihan == '4':
-            tampilkan_isi_keranjang(data.user_login)
-            input("Tekan ENTER untuk kembali...")
-        elif pilihan == '5':
-            layar_bersih()
-            hapus_dari_keranjang()
-        elif pilihan == '6':
-            layar_bersih()
-            checkout()
-        elif pilihan == '7':
-            data.status_login = False
-            data.user_login = ""
-            print("\nAnda telah berhasil Logout.")
-            time.sleep(2)
-        else:
-            print("\nPilihan tidak valid. Silakan coba lagi.")
-            time.sleep(1)
-
-def main_loop():
-    while True:
-        tampilkan_header_utama()
-        menu_awal()
-        
-        pilihan = input("\nMasukkan pilihan (1-3): ")
-        
-        if pilihan == '1':
-            login_berhasil = login()
-            if login_berhasil and data.role_login == "user":
-                run_user_menu()
-            # Asumsi: Jika ada role admin, tambahkan di sini
-        elif pilihan == '2':
-            register()
-        elif pilihan == '3':
-            print("\nTerima kasih telah mengunjungi Toko Wingky! Sampai jumpa.")
-            time.sleep(2)
-            break
-        else:
-            print("\nPilihan tidak valid. Silakan coba lagi.")
-            time.sleep(1)
-
-if __name__ == "__main__":
-    main_loop()
-
     
 def validasi_input_angka(prompt, pesan_error="Input harus berupa angka!"):
     while True:

@@ -22,7 +22,7 @@ def main():
             berhasil_login = login()
             
             if berhasil_login:
-                input("Press enter...")  # Debug pause
+                input("Tekan enter...")  # Debug pause
                 
                 # Cek role user setelah login berhasil
                 if data.role_login == "admin":
