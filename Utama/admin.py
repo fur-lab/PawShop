@@ -57,12 +57,21 @@ def edit():
     print("=" * 50)
     
     table = PrettyTable()
-    table.field_names = ["ID", "Nama Produk"]
+    table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
     table.align["ID"] = "c"
     table.align["Nama Produk"] = "l"
+    table.align["Kategori"] = "l"
+    table.align["Harga"] = "r"
+    table.align["Stok"] = "c"
     
     for id_produk, produk_data in data.produk.items():
-        table.add_row([id_produk, produk_data['nama']])
+        table.add_row([
+            id_produk,
+            produk_data['nama'],
+            produk_data['kategori'],
+            produk_data['harga'],
+            produk_data['stok']
+        ])
     
     print(table)
     
@@ -120,7 +129,7 @@ def hapus():
     print("=" * 50)
     
     table = PrettyTable()
-    table.field_names = ["ID", "Nama Produk"]
+    table.field_names = ["ID", "Nama Produk",]
     table.align["ID"] = "c"
     table.align["Nama Produk"] = "l"
     
