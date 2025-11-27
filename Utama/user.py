@@ -9,7 +9,7 @@ from data import *
 
 def menu_user() :
         print("=" * 50)
-        print(f"|           MENU PELANGGAN - Halo, !             |")
+        print(f"|           MENU PELANGGAN - Halo, !          |")
         print("=" * 50)
         print("\n1. Lihat Semua Produk")
         print("2. Cari Produk")
