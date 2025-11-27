@@ -41,7 +41,7 @@ def main():
                         elif pilihan_admin == "2":
                             layar_bersih()
                             update()
-                        
+                            
                         elif pilihan_admin == "3":
                             layar_bersih()
                             edit()
@@ -53,13 +53,8 @@ def main():
                         
                         elif pilihan_admin == "5":
                             layar_bersih()
-                            print("=" * 59)
-                            print("|                      CARI PRODUK                        |")
-                            print("=" * 59)
-                            keyword = input("Masukkan nama produk: ")
-                            cari_produk_dan_tampilkan(keyword)
-                            input("\nTekan ENTER untuk kembali...")
-                        
+                            cari()
+
                         elif pilihan_admin == "6":
                             layar_bersih()
                             print("Logout berhasil!")
@@ -88,12 +83,7 @@ def main():
                         
                         elif pilihan_user == "2":
                             layar_bersih()
-                            print("=" * 59)
-                            print("|                      CARI PRODUK                        |")
-                            print("=" * 59)
-                            keyword = input("Masukkan nama produk: ")
-                            cari_produk_dan_tampilkan(keyword)
-                            input("\nTekan ENTER untuk kembali...")
+                            cari()
                         
                         elif pilihan_user == "3":
                             layar_bersih()

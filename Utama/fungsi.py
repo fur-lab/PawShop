@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 import data  
 
 def tampilkan_header_utama():
-    os.system('cls || clear')
+    layar_bersih()
     print("=" * 60)
     print("|      SELAMAT DATANG DI TOKO PERALATAN HEWAN PAWSHOP      |")
     print("=" * 60)
