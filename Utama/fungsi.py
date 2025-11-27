@@ -281,7 +281,7 @@ def generate_id_produk_baru():
 
 def tampilkan_daftar_produk():
     print("\n" + "=" * 59)
-    print("|                   DAFTAR PRODUK WINGKY                  |")
+    print("|                   DAFTAR PRODUK PAW SHOP                |")
     print("=" * 59)
     
     if len(data.produk) == 0:

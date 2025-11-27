@@ -84,8 +84,7 @@ def main():
                         
                         elif pilihan_user == "2":
                             layar_bersih()
-                            keyword = input("Masukkan nama produk yang dicari: ")
-                            cari_produk_dan_tampilkan(keyword)
+                            cari()
                         
                         elif pilihan_user == "3":
                             layar_bersih()
@@ -140,4 +139,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-    
