@@ -53,7 +53,7 @@ def main():
                         
                         elif pilihan_admin == "5":
                             layar_bersih()
-                            cari()
+                            cari_produk_dan_tampilkan()
 
                         elif pilihan_admin == "6":
                             layar_bersih()
@@ -83,7 +83,7 @@ def main():
                         
                         elif pilihan_user == "2":
                             layar_bersih()
-                            cari()
+                            cari_produk_dan_tampilkan()
                         
                         elif pilihan_user == "3":
                             layar_bersih()
@@ -138,4 +138,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-    

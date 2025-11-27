@@ -218,7 +218,7 @@ def tampilkan_isi_keranjang(current_user):
 
 def cari_produk_dan_tampilkan(keyword):
     print("\n" + "=" * 59)
-    print("|                     HASIL PENCARIAN                     |")
+    print("|                     HASIL PENCARIAN                     |")
     print("=" * 59)
     
     table = PrettyTable()
@@ -425,7 +425,7 @@ def generate_id_produk_baru():
 
 def tampilkan_daftar_produk():
     print("\n" + "=" * 59)
-    print("|                   DAFTAR PRODUK WINGKY                  |")
+    print("|                   DAFTAR PRODUK PAW SHOP                |")
     print("=" * 59)
     
     if len(data.produk) == 0:
