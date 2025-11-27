@@ -2,9 +2,9 @@ import os
 import time
 import data
 from prettytable import PrettyTable
-from fungsi import *
 from admin import *
-
+from fungsi import *
+from user import *
 
 def main():
     # Loadingnya hanya sekali pas di awal program
@@ -53,7 +53,8 @@ def main():
                         
                         elif pilihan_admin == "5":
                             layar_bersih()
-                            cari()
+                            keyword = input("Masukkan nama produk: ")
+                            cari_produk_dan_tampilkan(keyword)
 
                         elif pilihan_admin == "6":
                             layar_bersih()
@@ -83,7 +84,8 @@ def main():
                         
                         elif pilihan_user == "2":
                             layar_bersih()
-                            cari()
+                            keyword = input("Masukkan nama produk yang dicari: ")
+                            cari_produk_dan_tampilkan(keyword)
                         
                         elif pilihan_user == "3":
                             layar_bersih()
