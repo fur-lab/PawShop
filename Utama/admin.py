@@ -55,9 +55,9 @@ def update():
 
 
 def edit() : # pilihan 3
-    print("=" * 50)
-    print("|                   UPDATE PRODUK                      |")
-    print("=" * 50)
+    print("=" * 55)
+    print("|                   UPDATE PRODUK                     |")
+    print("=" * 55)
     
     # Menggunakan PrettyTable untuk menampilkan list produk
     table = PrettyTable()
@@ -132,9 +132,9 @@ def edit() : # pilihan 3
         time.sleep(2)
 
 def hapus():
-    print("=" * 50)
-    print("|      HAPUS PRODUK        |")
-    print("=" * 50)
+    print("=" * 25)
+    print("|      HAPUS PRODUK     |")
+    print("=" * 25)
     
     table = PrettyTable()
     table.field_names = ["ID", "Nama Produk",]
