@@ -2,8 +2,7 @@ import os
 import time
 import pwinput
 from prettytable import PrettyTable
-import data 
-from user import *
+import data
 
 def tampilkan_header_utama():
     layar_bersih()
@@ -21,13 +20,17 @@ def login():
     print("\n-------------------- LOGIN SECTION -------------------------")
     
     try:
-        username = input("Username: ")
-        if not username:
-            raise ValueError("Username tidak boleh kosong")
+        username = input("Username: ").strip()
+        
+        # Validasi username tidak boleh kosong
+        if not username or username == "":
+            raise ValueError("Username tidak boleh kosong!")
         
         password = pwinput.pwinput(prompt="Password: ", mask="*")
-        if not password:
-            raise ValueError("Password tidak boleh kosong")
+        
+        # Validasi password tidak boleh kosong
+        if not password or password.strip() == "":
+            raise ValueError("Password tidak boleh kosong!")
         
         # Verifikasi login
         if username in data.pengguna and data.pengguna[username]["password"] == password:
@@ -36,7 +39,7 @@ def login():
             data.status_login = True
             
             print(f"\nLogin berhasil! Selamat datang, {username}")
-            print(f"Role: {data.role_login}")  # Debug
+            print(f"Role: {data.role_login}")
             time.sleep(2)
             return True
         else:
@@ -52,19 +55,29 @@ def register():
     print("\n-------------------- REGISTER SECTION ----------------------")
     
     try:
-        username_baru = input("Username baru: ")
-        if not username_baru:
-            raise ValueError("Username tidak boleh kosong")
+        username_baru = input("Username baru: ").strip()
         
+        # Validasi username tidak boleh kosong atau hanya spasi
+        if not username_baru or username_baru == "":
+            raise ValueError("Username tidak boleh kosong!")
+        
+        # Validasi username tidak boleh mengandung spasi
+        if ' ' in username_baru:
+            raise ValueError("Username tidak boleh mengandung spasi!")
+        
+        # Validasi username hanya boleh huruf dan angka
+        if not username_baru.isalnum():
+            raise ValueError("Username hanya boleh mengandung huruf dan angka!")
+        
+        # Validasi username sudah terdaftar
         if username_baru in data.pengguna:
             raise ValueError("Username sudah terdaftar!")
         
-        username_baru = username_baru.encode('unicode_escape').decode()
-        username_baru = username_baru.replace('\\\\','')
-        
         password_baru = pwinput.pwinput(prompt="Silahkan input password baru: ", mask="*")
-        if not password_baru:
-            raise ValueError("Password tidak boleh kosong")
+        
+        # Validasi password tidak boleh kosong
+        if not password_baru or password_baru.strip() == "":
+            raise ValueError("Password tidak boleh kosong!")
         
         # Validasi Password Minimal 8 Karakter
         if len(password_baru) < 8:
@@ -84,173 +97,6 @@ def register():
         time.sleep(2)
         return False
 
-def menu_user():
-    # Tetapkan lebar header yang diinginkan (sama dengan 50 karakter)
-    width = 50
-    header_text = f"MENU PELANGGAN - Halo, {data.user_login}!"
-
-    # Gunakan str.center(lebar) untuk memusatkan teks dalam lebar 48 (50 - 2 untuk tanda |)
-    centered_content = header_text.center(width - 2)
-
-    print("=" * width)
-    # Header dirapikan menggunakan string centering
-    print(f"|{centered_content}|")
-    print("=" * width)
-    print("\n1. Lihat Semua Produk")
-    print("2. Cari Produk")
-    print("3. Tambah ke Keranjang")
-    print("4. Lihat Keranjang")
-    print("5. Hapus dari Keranjang")
-    print("6. Checkout")
-    print("7. Logout")
-
-def tambah_keranjang():
-    while True:  # loop utama untuk tambah barang
-        print("=" * 59)
-        print("|                  TAMBAH KE KERANJANG                    |")
-        print("=" * 59)
-
-        table = PrettyTable()
-        table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
-        table.align["ID"] = "c"
-        table.align["Nama Produk"] = "l"
-        table.align["Kategori"] = "l"
-        table.align["Harga"] = "r"
-        table.align["Stok"] = "c"
-
-        for id_produk, produk_data in data.produk.items():
-            table.add_row([
-                id_produk,
-                produk_data['nama'],
-                produk_data['kategori'],
-                f"Rp {produk_data['harga']:,}",
-                produk_data['stok']
-            ])
-
-        print(table)
-
-        try:
-            id_beli = validasi_input_angka("\nMasukkan ID produk yang ingin dibeli: ", "ID harus berupa angka!")
-            if id_beli is None:
-                raise ValueError("Input dibatalkan")
-
-            if id_beli not in data.produk:
-                raise KeyError("Produk dengan ID tersebut tidak ditemukan!")
-
-            jumlah_beli = validasi_input_angka("Jumlah: ", "Jumlah harus berupa angka!")
-            if jumlah_beli is None or jumlah_beli <= 0:
-                raise ValueError("Jumlah harus lebih dari 0")
-
-            if jumlah_beli > data.produk[id_beli]["stok"]:
-                raise ValueError(f"Stok tidak cukup! Stok tersedia: {data.produk[id_beli]['stok']}")
-
-            if data.user_login not in data.keranjang:
-                data.keranjang[data.user_login] = {}
-
-            if id_beli in data.keranjang[data.user_login]:
-                data.keranjang[data.user_login][id_beli]["jumlah"] += jumlah_beli
-            else:
-                data.keranjang[data.user_login][id_beli] = {
-                    "nama": data.produk[id_beli]["nama"],
-                    "harga": data.produk[id_beli]["harga"],
-                    "jumlah": jumlah_beli
-                }
-
-            print(f"\n{data.produk[id_beli]['nama']} (x{jumlah_beli}) berhasil ditambahkan ke keranjang!")
-            time.sleep(1)
-
-            # Loop untuk tanya "Tambah barang lagi?"
-            while True:
-                tambah_lagi = input("\nTambah barang lagi? (y/n): ").lower()
-                if tambah_lagi == 'y':
-                    break  # ulang dari atas
-                elif tambah_lagi == 'n':
-                    print("Kembali ke menu pelanggan...")
-                    time.sleep(1)
-                    return  # keluar dari fungsi
-                else:
-                    print("Input tidak valid. Silakan masukkan 'y' atau 'n'.")
-
-        except (ValueError, KeyError) as e:
-            print(f"\nError: {e}")
-            print("=" * 59)
-            time.sleep(2)
-
-def tampilkan_isi_keranjang(current_user):
-    print("=" * 60)
-    print("|                     KERANJANG BELANJA                      |")
-    print("=" * 60)
-    
-    if current_user not in data.keranjang or len(data.keranjang[current_user]) == 0:
-        print("\nKeranjang belanja kosong.")
-        print("=" * 60)
-        return 0
-    else:
-        table = PrettyTable()
-        table.field_names = ["No", "Nama Produk", "Harga", "Jumlah", "Subtotal"]
-        table.align["No"] = "c"
-        table.align["Nama Produk"] = "l"
-        table.align["Harga"] = "r"
-        table.align["Jumlah"] = "c"
-        table.align["Subtotal"] = "r"
-        
-        nomor = 1
-        list_items = []
-        
-        for id_produk, item in data.keranjang[current_user].items():
-            subtotal = item["harga"] * item["jumlah"]
-            list_items.append(item)
-            table.add_row([
-                nomor,
-                item['nama'],
-                f"Rp {item['harga']:,}",
-                item['jumlah'],
-                f"Rp {subtotal:,}"
-            ])
-            nomor += 1
-        
-        print(table)
-        
-        total = hitung_total_keranjang_rekursif(list_items)
-        
-        print(f"{'TOTAL':>10} Rp {total:,}")
-        print("=" * 59)
-        return total
-
-def cari_produk_dan_tampilkan(keyword):
-    print("\n" + "=" * 59)
-    print("|                  HASIL PENCARIAN                   |")
-    print("=" * 59)
-    
-    table = PrettyTable()
-    table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
-    table.align["ID"] = "c"
-    table.align["Nama Produk"] = "l"
-    table.align["Kategori"] = "l"
-    table.align["Harga"] = "r"
-    table.align["Stok"] = "c"
-    
-    ketemu = False
-    for id_produk, produk_data in data.produk.items():
-        if keyword.lower() in produk_data['nama'].lower():
-            table.add_row([
-                id_produk,
-                produk_data['nama'],
-                produk_data['kategori'],
-                f"Rp {produk_data['harga']:,}",
-                produk_data['stok']
-            ])
-            ketemu = True
-    
-    if ketemu:
-        print(table)
-        
-    else:
-        print("\nProduk tidak ditemukan.")
-
-    print("=" * 59)
-    time.sleep(2)
-    
 def validasi_input_angka(prompt, pesan_error="Input harus berupa angka!"):
     while True:
         try:
@@ -308,6 +154,39 @@ def tampilkan_daftar_produk():
     
     print("=" * 59)
 
+def cari_produk_dan_tampilkan(keyword):
+    print("\n" + "=" * 59)
+    print("|                  HASIL PENCARIAN                        |")
+    print("=" * 59)
+    
+    table = PrettyTable()
+    table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
+    table.align["ID"] = "c"
+    table.align["Nama Produk"] = "l"
+    table.align["Kategori"] = "l"
+    table.align["Harga"] = "r"
+    table.align["Stok"] = "c"
+    
+    ketemu = False
+    for id_produk, produk_data in data.produk.items():
+        if keyword.lower() in produk_data['nama'].lower():
+            table.add_row([
+                id_produk,
+                produk_data['nama'],
+                produk_data['kategori'],
+                f"Rp {produk_data['harga']:,}",
+                produk_data['stok']
+            ])
+            ketemu = True
+    
+    if ketemu:
+        print(table)
+    else:
+        print("\nProduk tidak ditemukan.")
+
+    print("=" * 59)
+    time.sleep(2)
+
 def layar_bersih():
     os.system('cls || clear')
 
@@ -320,4 +199,3 @@ def loading(lama=30, waktu=2.5):
     print("Berhasil memuat.....")
     input("Tekan ENTER untuk lanjut ke menu...")
     layar_bersih()
-

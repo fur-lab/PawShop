@@ -1,9 +1,7 @@
-import os
 import time
 import data
-from prettytable import PrettyTable
-from admin import *
 from fungsi import *
+from admin import *
 from user import *
 
 def main():
@@ -22,7 +20,7 @@ def main():
             berhasil_login = login()
             
             if berhasil_login:
-                input("Tekan enter...")  # Debug pause
+                input("Tekan enter...")
                 
                 # Cek role user setelah login berhasil
                 if data.role_login == "admin":
@@ -40,16 +38,15 @@ def main():
                         
                         elif pilihan_admin == "2":
                             layar_bersih()
-                            update()
+                            tambah_produk()
                             
                         elif pilihan_admin == "3":
                             layar_bersih()
-                            edit()
-                        
+                            edit_produk()
                         
                         elif pilihan_admin == "4":
                             layar_bersih()
-                            hapus()
+                            hapus_produk()
                         
                         elif pilihan_admin == "5":
                             layar_bersih()
@@ -84,7 +81,8 @@ def main():
                         
                         elif pilihan_user == "2":
                             layar_bersih()
-                            cari()
+                            keyword = input("Masukkan nama produk: ")
+                            cari_produk_dan_tampilkan(keyword)
                         
                         elif pilihan_user == "3":
                             layar_bersih()
@@ -138,4 +136,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+    
