@@ -5,7 +5,7 @@ import time
 
 def menu_admin():
     print("=" * 50)
-    print(f"|            MENU ADMIN - Halo, Admin!             |")
+    print(f"|           MENU ADMIN - Halo, Admin!            |")
     print("=" * 50)
     print("1. Lihat Semua Produk")
     print("2. Tambah Produk")
@@ -53,7 +53,7 @@ def update():
 
 def edit():
     print("=" * 50)
-    print("|                UPDATE PRODUK                   |")
+    print("|                   UPDATE PRODUK                      |")
     print("=" * 50)
     
     table = PrettyTable()
@@ -125,7 +125,7 @@ def edit():
 
 def hapus():
     print("=" * 50)
-    print("|                 HAPUS PRODUK                   |")
+    print("|      HAPUS PRODUK        |")
     print("=" * 50)
     
     table = PrettyTable()
