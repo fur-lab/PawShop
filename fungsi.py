@@ -23,9 +23,9 @@ def menu_awal():
     print("3. Keluar")
 
 def login() :
-        print("=" * 50)
-        print(f"|               MENU LOGIN              |")
-        print("=" * 50)
+        print("="*60)
+        print(f"|               MENU LOGIN             |")
+        print("="*60)
         print("1. Admin")
         print("2. User")
 
