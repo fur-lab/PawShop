@@ -2,7 +2,7 @@
 # cara bacanya {username: {"password": password, "role": role}}
 pengguna = { 
     "gea": {
-        "password": "pacar seokjin",
+        "password": "seokjin92",
         "role": "admin"
     },
     "user": {
