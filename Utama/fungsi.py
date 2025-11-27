@@ -58,6 +58,9 @@ def register():
         if username_baru in data.pengguna:
             raise ValueError("Username sudah terdaftar!")
         
+        username_baru = username_baru.encode('unicode_escape').decode()
+        username_baru = username_baru.replace('\\\\','')
+        
         password_baru = pwinput.pwinput(prompt="Silahkan input password baru: ", mask="*")
         if not password_baru:
             raise ValueError("Password tidak boleh kosong")
