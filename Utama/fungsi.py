@@ -7,7 +7,7 @@ import data
 def tampilkan_header_utama():
     os.system('cls || clear')
     print("=" * 60)
-    print("|      SELAMAT DATANG DI TOKO PERALATAN KUCING WINGKY      |")
+    print("|      SELAMAT DATANG DI TOKO PERALATAN HEWAN PAWSHOP      |")
     print("=" * 60)
 
 def menu_awal():
@@ -64,7 +64,7 @@ def register():
         
         # Validasi Password Minimal 8 Karakter
         if len(password_baru) < 8:
-             raise ValueError("Password minimal 8 karakter!")
+            raise ValueError("Password minimal 8 karakter!")
         
         data.pengguna[username_baru] = {
             "password": password_baru,
@@ -173,13 +173,13 @@ def tambah_keranjang():
             time.sleep(2)
 
 def tampilkan_isi_keranjang(current_user):
-    print("=" * 59)
-    print("|                   KERANJANG BELANJA                     |")
-    print("=" * 59)
+    print("=" * 60)
+    print("|                    KERANJANG BELANJA                       |")
+    print("=" * 60)
     
     if current_user not in data.keranjang or len(data.keranjang[current_user]) == 0:
         print("\nKeranjang belanja kosong.")
-        print("=" * 59)
+        print("=" * 60)
         return 0
     else:
         table = PrettyTable()
@@ -343,7 +343,6 @@ def run_user_menu():
             cari_produk_dan_tampilkan(keyword)
             input("Tekan ENTER untuk kembali...")
         elif pilihan == '3':
-            # ✅ FIX UTAMA: Pastikan Loop berlanjut selama tambah_keranjang mengembalikan True ('y')
             lanjut_tambah = True
             while lanjut_tambah:
                 # Nilai kembali dari tambah_keranjang (True/False) menentukan apakah loop ini berjalan lagi
@@ -452,9 +451,9 @@ def tampilkan_daftar_produk():
 
 def tambah_keranjang():
     while True:  # loop utama untuk tambah barang
-        print("=" * 59)
-        print("|                  TAMBAH KE KERANJANG                    |")
-        print("=" * 59)
+        print("=" * 60)
+        print("|                   TAMBAH KE KERANJANG                    |")
+        print("=" * 60)
 
         table = PrettyTable()
         table.field_names = ["ID", "Nama Produk", "Kategori", "Harga", "Stok"]
@@ -513,9 +512,9 @@ def tambah_keranjang():
                 elif tambah_lagi == 'n':
                     print("Kembali ke menu pelanggan...")
                     time.sleep(1)
-                    return  # keluar dari fungsi
                 else:
                     print("Input tidak valid. Silakan masukkan 'y' atau 'n'.")
+                    return  # keluar dari fungsi
 
         except (ValueError, KeyError) as e:
             print(f"\nError: {e}")
@@ -565,7 +564,7 @@ def tampilkan_isi_keranjang(current_user):
 
 def cari_produk_dan_tampilkan(keyword):
     print("\n" + "=" * 59)
-    print("|                     HASIL PENCARIAN                     |")
+    print("|                   HASIL PENCARIAN                     |")
     print("=" * 59)
     
     table = PrettyTable()
