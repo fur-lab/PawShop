@@ -1,8 +1,9 @@
 import os
 import time
+import data
 import pwinput
 from prettytable import PrettyTable
-import data
+
 
 def tampilkan_header_utama():
     layar_bersih()
